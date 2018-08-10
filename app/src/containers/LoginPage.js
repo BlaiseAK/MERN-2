@@ -6,14 +6,14 @@ import Axios from '../../node_modules/axios';
 class LoginPage extends React.Component {
     state = {
         errors: {},
-        user: {
-            email: '',
-            password: ''
-        }
+        email: '',
+        password: ''
+        
     };
 
     handleInputChange = event => {
-        const {name, value} = event.target;
+        const name = event.target.name;
+        let value = event.target.value
         this.setState({
             [name]: value
         });
@@ -21,11 +21,11 @@ class LoginPage extends React.Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        if(this.state.user.email && this.state.user.password) {
+        if(this.state.email && this.state.password) {
             // axios ajax call here
             Axios.post('/auth/login', {
-                email: this.state.user.email,
-                password: this.state.user.password
+                email: this.state.email,
+                password: this.state.password
             })
             .then(res=> console.log(res.body))
             .then(this.setState({user: {email: '', password: ''}}))
@@ -44,7 +44,7 @@ class LoginPage extends React.Component {
                         <input
                         type="email"
                         name="email"
-                        value={this.state.user.name}
+                        value={this.state.email}
                         onChange={this.handleInputChange}
                         />
                     </label>
@@ -55,7 +55,7 @@ class LoginPage extends React.Component {
                         <input
                         type="password"
                         name="password"
-                        value={this.state.user.password}
+                        value={this.state.password}
                         onChange={this.handleInputChange}
                         />
                     </label>

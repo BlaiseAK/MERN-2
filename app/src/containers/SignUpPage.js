@@ -7,11 +7,9 @@ class SignUpPage extends React.Component {
         super(props);
         this.state = {
             errors: {},
-            user: {
-                email: '',
-                name: '',
-                password: ''
-            }
+            email: '',
+            name: '',
+            password: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -25,15 +23,15 @@ class SignUpPage extends React.Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        if(this.state.user.name && this.state.user.email && this.state.user.password) {
+        if(this.state.name && this.state.email && this.state.password) {
             // axios ajax call here
             Axios.post('/auth/signup', {
-                name: this.state.user.name,
-                email: this.state.user.email,
-                password: this.state.user.email
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.email
             })
             .then(res=> console.log(res.body))
-            .then(this.setState({user: {name: '', email: '', password: ''}}))
+            .then(this.setState({name: '', email: '', password: ''}))
             .catch(err=> console.log(err));
         } else {
             alert('Please check that the whole form is filed out');
@@ -52,7 +50,7 @@ class SignUpPage extends React.Component {
                         <input
                         type="text"
                         name="name"
-                        value={this.state.user.name}
+                        value={this.state.name}
                         onChange={this.handleInputChange}
                         />
                     </label>
@@ -63,7 +61,7 @@ class SignUpPage extends React.Component {
                         <input
                         type="email"
                         name="email"
-                        value={this.state.user.email}
+                        value={this.state.email}
                         onChange={this.handleInputChange}
                         />
                     </label>
@@ -74,7 +72,7 @@ class SignUpPage extends React.Component {
                         <input
                         type="password"
                         name="password"
-                        value={this.state.user.name}
+                        value={this.state.password}
                         onChange={this.handleInputChange}
                         />
                     </label>
