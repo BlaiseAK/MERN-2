@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Axios from '../../node_modules/axios';
+import API from '../utils/API'
 
 class SignUpPage extends React.Component {
     constructor(props) {
@@ -25,10 +25,10 @@ class SignUpPage extends React.Component {
         event.preventDefault();
         if(this.state.name && this.state.email && this.state.password) {
             // axios ajax call here
-            Axios.post('/auth/signup', {
+            API.signup({
                 name: this.state.name,
                 email: this.state.email,
-                password: this.state.email
+                password: this.state.password
             })
             .then(res=> console.log(res.body))
             .then(this.setState({name: '', email: '', password: ''}))
