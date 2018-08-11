@@ -62,9 +62,8 @@ function validateLoginForm(payload) {
 }
 
 router.post('/signup', (req, res, next) => {
-    console.log(`the request: ${req[1]}=======the response: ${res[1]}=======next: ${next[1]}`);
     const validationResult = validateSignupForm(req.body);
-    console.log(`validationResult says what?! ${validationResult[0]}`);
+    console.log(`router.post on the auth.js file: req.body, ${req[0]}`)
     if(!validationResult.success) {
         return res.status(400).json({
             success: false,

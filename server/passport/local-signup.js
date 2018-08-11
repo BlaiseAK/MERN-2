@@ -13,8 +13,12 @@ module.exports = new LocalStrategy({
         password: password.trim(),
         name: req.body.name.trim()
     };
-
+    console.log(`this is the req on the local-signup file: ${req.body}`);
+    console.log(`this is the email on the local-signup file: ${email}`);
+    console.log(`this is the password on the local-signup file: ${password}`);
+    console.log(`this is the done on the local-signup file: ${done}`);
     const newUser = new User(userData);
+    console.log(`this is the new user on the local-signup file: ${newUser}`);
     newUser.save((err) => {
         if(err) {return done(err);}
 

@@ -30,12 +30,15 @@ class SignUpPage extends React.Component {
                 password: this.state.password,
                 name: this.state.name
             })
-            .then(res=> console.log(res.body))
+            .then(res=> console.log(res))
             .then(this.setState({email: '', password: '', name: ''}))
             .catch(err=> console.log(err));
         } else {
             alert('Please check that the whole form is filed out');
         }
+        console.log(`name: ${this.state.name}`);
+        console.log(`email: ${this.state.email}`);
+        console.log(`password: ${this.state.password}`);
     }
 
 
