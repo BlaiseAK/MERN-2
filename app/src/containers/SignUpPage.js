@@ -8,8 +8,8 @@ class SignUpPage extends React.Component {
         this.state = {
             errors: {},
             email: '',
-            name: '',
-            password: ''
+            password: '',
+            name: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -26,12 +26,12 @@ class SignUpPage extends React.Component {
         if(this.state.name && this.state.email && this.state.password) {
             // axios ajax call here
             API.signup({
-                name: this.state.name,
                 email: this.state.email,
-                password: this.state.password
+                password: this.state.password,
+                name: this.state.name
             })
             .then(res=> console.log(res.body))
-            .then(this.setState({name: '', email: '', password: ''}))
+            .then(this.setState({email: '', password: '', name: ''}))
             .catch(err=> console.log(err));
         } else {
             alert('Please check that the whole form is filed out');

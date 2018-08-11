@@ -62,7 +62,9 @@ function validateLoginForm(payload) {
 }
 
 router.post('/signup', (req, res, next) => {
+    console.log(`the request: ${req[1]}=======the response: ${res[1]}=======next: ${next[1]}`);
     const validationResult = validateSignupForm(req.body);
+    console.log(`validationResult says what?! ${validationResult[0]}`);
     if(!validationResult.success) {
         return res.status(400).json({
             success: false,
@@ -91,7 +93,10 @@ router.post('/signup', (req, res, next) => {
             success: true,
             message: 'You have successfully signed up! Now you should be able to log in.'
         });
-    }), (req, res, next);
+    })(req, res, next);
+    console.log(`req at the end of the router: ${req}`);
+    console.log(`res at the end of the router: ${res}`);
+    console.log(`next at the end of the router: ${next}`);
 });
 
 router.post('/login', (req, res, next) => {
@@ -124,7 +129,7 @@ router.post('/login', (req, res, next) => {
             token,
             user: userData
         });
-    }), (req, res, next);
+    })(req, res, next);
 });
 
 module.exports = router;

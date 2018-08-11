@@ -29,7 +29,7 @@ class LoginPage extends React.Component {
             })
             .then(res=> console.log(res.body))
             .then(this.setState({user: {email: '', password: ''}}))
-            .catch(err=> console.log(err));
+            .catch(err=> console.log(err.response));
         } else {
             alert('Please check that all the fields were filled out');
         }
