@@ -10,6 +10,8 @@ const UserSchema = new mongoose.Schema({
     name: String
 });
 
+mongoose.pluralize(null);
+
 UserSchema.methods.comparePassword = function comparePassword(password, callback) {
     bcrypt.compare(password, this.password, callback);
 };

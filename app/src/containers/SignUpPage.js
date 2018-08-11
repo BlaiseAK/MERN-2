@@ -32,7 +32,7 @@ class SignUpPage extends React.Component {
             })
             .then(res=> console.log(res.body))
             .then(this.setState({name: '', email: '', password: ''}))
-            .catch(err=> console.log(err));
+            .catch(err=> console.log(err.response));
         } else {
             alert('Please check that the whole form is filed out');
         }
