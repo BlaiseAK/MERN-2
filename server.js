@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 const app = express();
 const config = require('./config');
 const PORT = process.env.PORT || 3001;
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
+app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
