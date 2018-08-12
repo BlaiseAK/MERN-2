@@ -28,9 +28,6 @@ function validateSignupForm(payload){
         message = 'Check the form for errors.';
     }
 
-    console.log(`Payload.email of the auth.js file in routes: ${payload.email}`);
-    console.log(`Payload.password of the auth.js file in routes: ${payload.password}`);
-    console.log(`Payload.name of the auth.js file in routes: ${payload.name}`);
     return {
         success: isFormValid,
         message,
@@ -42,8 +39,8 @@ function validateLoginForm(payload) {
     const errors = {};
     let isFormValid = true;
     let message = '';
-
-    if(!payload || typeof payload.email !== 'string' || payload.email.trim.length === 0) {
+    
+    if(!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
         isFormValid = false;
         errors.email = 'Please provide your email address.';
     }
@@ -52,11 +49,14 @@ function validateLoginForm(payload) {
         isFormValid = false;
         errors.password = 'Please provide your password.';
     }
-
+    
     if (!isFormValid) {
         message = 'Check the form for errors.';
     }
 
+    console.log(`Payload.email of the auth.js file in routes: ${payload.email}`);
+    console.log(`Payload.password of the auth.js file in routes: ${payload.password}`);
+    
     return {
         success: isFormValid,
         message,
@@ -66,7 +66,6 @@ function validateLoginForm(payload) {
 
 router.post('/signup', (req, res, next) => {
     const validationResult = validateSignupForm(req.body);
-    console.log(`router.post on the auth.js file: req.body.email, ${req.body.email}`)
     if(!validationResult.success) {
         return res.status(400).json({
             success: false,
@@ -85,7 +84,7 @@ router.post('/signup', (req, res, next) => {
                     }
                 });
             }
-
+            
             return res.status(400).json({
                 success: false,
                 message: 'Could not process the form.'
@@ -96,13 +95,13 @@ router.post('/signup', (req, res, next) => {
             message: 'You have successfully signed up! Now you should be able to log in.'
         });
     })(req, res, next);
-    console.log(`req at the end of the router: ${req.body.email}`);
-    console.log(`res at the end of the router: ${res}`);
-    console.log(`next at the end of the router: ${next}`);
 });
 
 router.post('/login', (req, res, next) => {
     const validationResult = validateLoginForm(req.body);
+    console.log(`router.post on the auth.js file: req.body.email, ${req.body.email}`);
+    console.log(`router.post on the auth.js file: req.body.password, ${req.body.password}`);
+    console.log(`router.post on the auth.js file: validationResult: ${validationResult.success}`);
     if (!validationResult.success) {
         return res.status(400).json({
             success: false,
@@ -110,7 +109,7 @@ router.post('/login', (req, res, next) => {
             errors: validationResult.errors
         });
     }
-
+    
     return passport.authenticate('local-login', (err, token, userData) => {
         if(err) {
             if(err.name === 'IncorrectCredentialsError') {
@@ -124,7 +123,11 @@ router.post('/login', (req, res, next) => {
                 message: 'Could not process the form.'
             });
         }
-
+        
+        console.log(`req at the end of the router: ${res.success}`);
+        console.log(`req at the end of the router: ${res.message}`);
+        console.log(`req at the end of the router: ${res.token}`);
+        console.log(`req at the end of the router: ${res.user}`);
         return res.json({
             success: true,
             message: 'You have successfully logged in!',

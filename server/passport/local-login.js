@@ -14,9 +14,14 @@ module.exports = new LocalStrategy({
         password: req.body.password.trim()
     };
 
+    console.log(`this is the req.body on the local-login file: ${req.body}`);
+    console.log(`this is the req.body.email on the local-login file: ${req.body.email}`);
+    console.log(`this is the req.body.password on the local-login file: ${req.body.password}`);
+
     return User.findOne({email: userData.email}, (err, user) => {
         if (err) {return done(err); }
 
+        console.log(`finding what is being searched for in local-login file: ${userData.email}`);
         // if the email is not found when queried
         if(!user) {
             const error = new Error('Incorrect email or password');

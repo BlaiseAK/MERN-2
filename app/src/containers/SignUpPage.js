@@ -36,9 +36,6 @@ class SignUpPage extends React.Component {
         } else {
             alert('Please check that the whole form is filed out');
         }
-        console.log(`name: ${this.state.name}`);
-        console.log(`email: ${this.state.email}`);
-        console.log(`password: ${this.state.password}`);
     }
 
 

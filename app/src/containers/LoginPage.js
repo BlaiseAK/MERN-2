@@ -4,16 +4,18 @@ import API from '../utils/API'
 
 
 class LoginPage extends React.Component {
-    state = {
-        errors: {},
-        email: '',
-        password: ''
-        
-    };
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            errors: {},
+            email: '',
+            password: ''
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    }
     handleInputChange = event => {
-        const name = event.target.name;
-        let value = event.target.value
+        const {name, value} = event.target;
         this.setState({
             [name]: value
         });
@@ -33,6 +35,8 @@ class LoginPage extends React.Component {
         } else {
             alert('Please check that all the fields were filled out');
         }
+        console.log(`email: ${this.state.email}`);
+        console.log(`password: ${this.state.password}`);
     }
 
     render () {return (
