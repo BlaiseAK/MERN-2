@@ -29,8 +29,8 @@ class LoginPage extends React.Component {
                 email: this.state.email,
                 password: this.state.password
             })
-            .then(res=> console.log(res.body))
-            .then(this.setState({user: {email: '', password: ''}}))
+            .then(res=> console.log(res))
+            .then(this.setState({email: '', password: ''}))
             .catch(err=> console.log(err.response));
         } else {
             alert('Please check that all the fields were filled out');

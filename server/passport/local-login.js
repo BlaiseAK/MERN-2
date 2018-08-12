@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
-const LocalStrategy = require('passport-local').Strategy;
+const LoginLocalStrategy = require('passport-local').Strategy;
 const config = ('../../config');
 
-module.exports = new LocalStrategy({
+module.exports = new LoginLocalStrategy({
     usernameFeild: 'email',
     passwordField: 'password',
     session: false,
@@ -24,7 +24,7 @@ module.exports = new LocalStrategy({
         console.log(`finding what is being searched for in local-login file: ${userData.email}`);
         // if the email is not found when queried
         if(!user) {
-            const error = new Error('Incorrect email or password');
+            const error = new Error('Incorrect password blaise!');
             error.name = 'IncorrectCredentialsError';
             return done(error);
         }
@@ -32,7 +32,7 @@ module.exports = new LocalStrategy({
         return user.comparePassword(userData.password, (passwordErr, isMatch) => {
             if (err) {return done(err); }
 
-            if(isMatch) {
+            if(!isMatch) {
                 const error = new Error('Incorrect email or password');
                 error.name = 'IncorrectCredentialsError';
 
@@ -44,11 +44,12 @@ module.exports = new LocalStrategy({
             };
 
             // create a token string
-            const token = jwt.sign(payload. config, jwtSecret);
+            const token = jwt.sign(payload. config.jwtSecret);
             const data = {
                 name: user.name
             };
-
+                console.log(`this is the token from local-sign.js file: ${token}`);
+                console.log(`this is the data.name from local-sign.js file: ${data.name}`);
             return done(null, token, data);
         });
     });

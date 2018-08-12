@@ -1,8 +1,8 @@
 const User = require('mongoose').model('User');
-const LocalStrategy = require('passport-local').Strategy;
+const SignupLocalStrategy = require('passport-local').Strategy;
 
 
-module.exports = new LocalStrategy({
+module.exports = new SignupLocalStrategy({
     usernameField: 'email',
     usernameField: 'password',
     session: false,

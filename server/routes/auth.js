@@ -124,10 +124,8 @@ router.post('/login', (req, res, next) => {
             });
         }
         
-        console.log(`req at the end of the router: ${res.success}`);
-        console.log(`req at the end of the router: ${res.message}`);
-        console.log(`req at the end of the router: ${res.token}`);
-        console.log(`req at the end of the router: ${res.user}`);
+        console.log(`req at the end of the router: ${token}`);
+        console.log(`req at the end of the router: ${userData}`);
         return res.json({
             success: true,
             message: 'You have successfully logged in!',
