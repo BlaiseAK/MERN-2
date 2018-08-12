@@ -10,8 +10,8 @@ module.exports = new LocalStrategy({
     passReqToCallback: true
 }, (req, email, password, done) => {
     const userData = {
-        email: email.trim(),
-        password: password.trim()
+        email: req.body.email.trim(),
+        password: req.body.password.trim()
     };
 
     return User.findOne({email: userData.email}, (err, user) => {

@@ -15,14 +15,14 @@ mongoose.pluralize(null);
 UserSchema.methods.comparePassword = function comparePassword(password, callback) {
     console.log('password: ' +password);
     console.log('callback: '+callback);
-    console.log('this.password: '+this.callback);
+    console.log('this.password: '+this.password);
     bcrypt.compare(password, this.password, callback);
 };
 
 UserSchema.pre('save', function saveHook(next) {
     const user = this;
 
-    console.log('user is what?'+user);
+    console.log(`user is what? ${user}`);
 
     if(!user.isModified('password')) return next();
 
@@ -33,7 +33,7 @@ UserSchema.pre('save', function saveHook(next) {
         return bcrypt.hash(user.password, salt, (hashError, hash) => {
             if(hashError) { return next(hashError); }
 
-            console.log('password before being saved' +user.password);
+            console.log('password before being saved ' +user.password);
             user.password = hash;
 
             return next();

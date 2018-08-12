@@ -28,6 +28,9 @@ function validateSignupForm(payload){
         message = 'Check the form for errors.';
     }
 
+    console.log(`Payload.email of the auth.js file in routes: ${payload.email}`);
+    console.log(`Payload.password of the auth.js file in routes: ${payload.password}`);
+    console.log(`Payload.name of the auth.js file in routes: ${payload.name}`);
     return {
         success: isFormValid,
         message,
@@ -63,7 +66,7 @@ function validateLoginForm(payload) {
 
 router.post('/signup', (req, res, next) => {
     const validationResult = validateSignupForm(req.body);
-    console.log(`router.post on the auth.js file: req.body, ${req[0]}`)
+    console.log(`router.post on the auth.js file: req.body.email, ${req.body.email}`)
     if(!validationResult.success) {
         return res.status(400).json({
             success: false,
@@ -93,7 +96,7 @@ router.post('/signup', (req, res, next) => {
             message: 'You have successfully signed up! Now you should be able to log in.'
         });
     })(req, res, next);
-    console.log(`req at the end of the router: ${req}`);
+    console.log(`req at the end of the router: ${req.body.email}`);
     console.log(`res at the end of the router: ${res}`);
     console.log(`next at the end of the router: ${next}`);
 });
