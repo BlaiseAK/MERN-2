@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import './App.css';
-import routes from './routes';
+
+import Base from './containers/Base';
 
 
 class App extends Component {
@@ -9,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
           <Router>
-            <Route history={routes}/>
+            <Base/>
           </Router>
       </div>
     );

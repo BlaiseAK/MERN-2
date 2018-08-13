@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import Auth from '../modules/Auth'
 import API from '../utils/API'
 
 
@@ -29,7 +30,7 @@ class LoginPage extends React.Component {
                 email: this.state.email,
                 password: this.state.password
             })
-            .then(res=> console.log(res))
+            .then(res=> Auth.authenticateUser(res.data.token))
             .then(this.setState({email: '', password: ''}))
             .catch(err=> console.log(err.response));
         } else {

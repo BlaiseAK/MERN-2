@@ -9,11 +9,11 @@ class DashboardPage extends React.Component {
             secretData: ''
         };
     }
-    componentDidMount() {
-        API.dashboard()
-            .then(res => this.setState({secretData: res.message}))
-            .catch(err => console.log(err));
-    }
+    // componentDidMount() {
+    //     API.dashboard()
+    //         .then(res => this.setState({secretData: res.message}))
+    //         .catch(err => console.log(err));
+    // }
 
     render() {
         return (

@@ -65,6 +65,7 @@ function validateLoginForm(payload) {
 }
 
 router.post('/signup', (req, res, next) => {
+    console.log(`User at router.post in auth.js ${req.body}`)
     const validationResult = validateSignupForm(req.body);
     if(!validationResult.success) {
         return res.status(400).json({
@@ -75,7 +76,7 @@ router.post('/signup', (req, res, next) => {
     }
     return passport.authenticate('local-signup', (err) => {
         if(err) {
-            if (err.name === 'MongoError' && err.code === 11000) {
+            if (err.name === 'BulkWriteError' && err.code === 11000) {
                 return res.status(409).json({
                     success: false,
                     message: 'Check the form for errors.',
@@ -99,9 +100,7 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
     const validationResult = validateLoginForm(req.body);
-    console.log(`router.post on the auth.js file: req.body.email, ${req.body.email}`);
-    console.log(`router.post on the auth.js file: req.body.password, ${req.body.password}`);
-    console.log(`router.post on the auth.js file: validationResult: ${validationResult.success}`);
+  
     if (!validationResult.success) {
         return res.status(400).json({
             success: false,

@@ -1,17 +1,21 @@
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
 const LoginLocalStrategy = require('passport-local').Strategy;
-const config = ('../../config');
+const config = require('../../config');
 
 module.exports = new LoginLocalStrategy({
-    usernameFeild: 'email',
+    usernameField: 'email',
     passwordField: 'password',
     session: false,
     passReqToCallback: true
 }, (req, email, password, done) => {
+    console.log(email)
+    console.log(req.body.email)
+    console.log(password)
+    console.log(req.body.password)
     const userData = {
-        email: req.body.email.trim(),
-        password: req.body.password.trim()
+        email: email.trim(),
+        password: password.trim()
     };
 
     console.log(`this is the req.body on the local-login file: ${req.body}`);
@@ -44,7 +48,7 @@ module.exports = new LoginLocalStrategy({
             };
 
             // create a token string
-            const token = jwt.sign(payload. config.jwtSecret);
+            const token = jwt.sign(payload, config.jwtSecret);
             const data = {
                 name: user.name
             };

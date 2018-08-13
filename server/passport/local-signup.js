@@ -4,13 +4,15 @@ const SignupLocalStrategy = require('passport-local').Strategy;
 
 module.exports = new SignupLocalStrategy({
     usernameField: 'email',
-    usernameField: 'password',
+    passwordField: 'password',
     session: false,
     passReqToCallback: true
 }, (req, email, password, done) => {
+    console.log(email);
+    console.log(password)
     const userData = {
-        email: req.body.email.trim(),
-        password: req.body.password.trim(),
+        email: email.trim(),
+        password: password.trim(),
         name: req.body.name.trim()
     };
 

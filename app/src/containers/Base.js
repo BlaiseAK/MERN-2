@@ -1,9 +1,13 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, Route, Switch} from 'react-router-dom';
 import Auth from '../modules/Auth';
+import HomePage from './HomePage';
+import SignUpPage from './SignUpPage';
+import LoginPage from './LoginPage';
+import DashboardPage from './DashboardPage';
 
-const Base = ({ children }) => (
+const Base = () => (
     <div>
         <div className="top-bar">
             <div className="top-bar-left">
@@ -11,7 +15,7 @@ const Base = ({ children }) => (
             </div>
             {Auth.isUserAuthenticated() ? (
             <div className="top-bar-right">
-                <Link to="/logout">Log out</Link>
+                <button onClick={Auth.deauthenticateUser()}><Link to="/">Log out</Link></button>
             </div>
             ):(
             <div className="top-bar-right">
@@ -20,12 +24,17 @@ const Base = ({ children }) => (
             </div>
             )}
         </div>
-        {children}
+            <Switch>
+                {Auth.isUserAuthenticated() ?
+                <Route exact path="/" component={DashboardPage} />
+                :
+                <Route exact path="/" component={HomePage} />
+                }
+                <Route exact path="/signup" component={SignUpPage} />
+                <Route exact path="/login" component={LoginPage} />
+                
+            </Switch>
     </div>
 );
-
-Base.propTypes = {
-    children: PropTypes.object.isRequired
-};
 
 export default Base;

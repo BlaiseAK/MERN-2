@@ -21,13 +21,15 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 
-const authCheckMiddleware = require('./server/middleware/auth-check');
-app.use('/api', authCheckMiddleware);
+
 
 const SignupStrategy = require('./server/passport/local-signup');
 const LoginStrategy = require('./server/passport/local-login');
 passport.use('local-signup', SignupStrategy);
 passport.use('local-login', LoginStrategy);
+
+const authCheckMiddleware = require('./server/middleware/auth-check');
+app.use('/api', authCheckMiddleware);
 
 
 const authRoutes = require('./server/routes/auth');

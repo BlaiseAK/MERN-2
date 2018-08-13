@@ -8,7 +8,7 @@ export default {
     login: function(loginData) {
         return Axios.post('/auth/login', loginData);
     },
-    dashboard: function () {
+    dashboard: function() {
         return Axios.get('/api/dashboard');
     }
 }
